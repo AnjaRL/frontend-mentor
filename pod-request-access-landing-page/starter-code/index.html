@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Frontend Mentor | Pod request access landing page</title>
+  </head>
+  <body>
+    <div class="container">
+      <header><img src="./assets/desktop/logo.svg" alt="" /></header>
+
+      <main>
+        <h1>
+          <span class="in-green"> PUBLISH YOUR PODCASTS</span> EVERYWHERE.
+        </h1>
+        <p>
+          Upload your audio to Pod with a single click. We’ll then distribute
+          your podcast to Spotify, Apple Podcasts, Google Podcasts, Pocket Casts
+          and more!
+        </p>
+
+        <section id="logos-row">
+          <img
+            class="spotify"
+            src="./assets/desktop/spotify.svg"
+            alt="spotify"
+          />
+          <img
+            class="apple"
+            src="./assets/desktop/apple-podcast.svg"
+            alt="apple-podcast"
+          />
+          <img
+            class="google"
+            src="./assets/desktop/google-podcasts.svg"
+            alt="google-podcast"
+          />
+          <img
+            class="pocket"
+            src="./assets/desktop/pocket-casts.svg"
+            alt="pocket-casts"
+          />
+        </section>
+
+        <!-- CREATE CLASS FOR CSS  -->
+        <form class="create-class" id="email-form">
+          <input
+            id="email"
+            type="email"
+            for="email"
+            placeholder="Email adress"
+          />
+
+          <!-- Button is better : focus, outline...  -->
+
+          <button id="submission" type="submit">Request Access</button>
+          <span id="message-error"></span>
+        </form>
+      </main>
+
+      <footer>
+        <img src="./assets/desktop/bg-pattern-dots.svg" alt="dots-for-footer" />
+      </footer>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
