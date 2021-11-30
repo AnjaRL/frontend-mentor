@@ -1,7 +1,259 @@
-.attribution {
-  font-size: 11px;
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap");
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: kumbh sans;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #b068e9 0%, #6463e7) no-repeat;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 23px;
+  box-shadow: 0px 50px 50px -20px rgba(53, 18, 122, 0.497159);
+  width: 327px;
+  top: 148px;
+  position: absolute;
+  max-height: 100%;
+}
+
+.content {
+  margin-top: 132px;
+  margin-bottom: 48px;
+  height: 100%;
+  width: 279px;
+  margin: 48px 24px 48px 24px;
+}
+
+/* .content[open] {
+  width: 279px;
+  height: 535px;
+  margin-bottom: 48px;
+} */
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 38px;
+  margin-top: -115px;
   text-align: center;
 }
+
+.question {
+  color: #4b4c5f;
+  font-size: 13px;
+  line-height: 13.08px;
+}
+
+details[open] .question {
+  font-weight: 700;
+  color: #1e1f36;
+}
+
+.details-content {
+  font-size: 12px;
+  color: #787887;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  width: 279px;
+}
+
+details > summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+details > summary::after {
+  content: url(./images/icon-arrow-down.svg);
+  width: 8px;
+  height: 4px;
+  display: inline-flex;
+  /* transition: transform 0.9s ease; */
+}
+
+details[open] > summary::after {
+  transform: rotate(180deg);
+  margin-top: 9px;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+hr {
+  margin: 1rem 0;
+  color: #e8e8ea;
+  border-style: solid;
+}
+
+.image-wrapper {
+  position: relative;
+  height: 180px;
+  width: 237px;
+  z-index: 1;
+}
+
+.woman-online-mobile {
+  position: absolute;
+  margin-top: 40px;
+  max-width: 100%;
+  z-index: 1;
+}
+
+.pattern-mobile {
+  position: absolute;
+  /* left: -40px; */
+  top: 141px;
+}
+
+.woman-online-desktop {
+  display: none;
+}
+
+.pattern-desktop {
+  display: none;
+}
+
+.box-desktop {
+  display: none;
+}
+
+.attribution {
+  font-size: 12px;
+  text-align: center;
+  /* font-family: ; */
+}
 .attribution a {
-  color: hsl(228, 45%, 44%);
+  color: hsl(125, 45%, 44%);
+  text-decoration: none;
+}
+
+/* FOR DESKTOP */
+
+@media screen and (min-width: 1024px) {
+  .card {
+    width: 920px;
+    height: 484px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .content {
+    margin-top: -180px;
+    margin-right: 95px;
+    height: 100%;
+    width: 350px;
+    /* margin: 48px 24px 48px 24px; */
+    float: right;
+    z-index: 1;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 43px;
+    margin-top: 65px;
+    text-align: left;
+  }
+
+  .question {
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  details > summary::after {
+    content: url(./images/icon-arrow-down.svg);
+    width: 5px;
+    height: 4px;
+    display: inline-flex;
+    /* transition: transform 0.9s ease; */
+  }
+
+  details[open] .question {
+    font-size: 14px;
+  }
+
+  .details-content {
+    width: 319px;
+  }
+
+  details > summary:hover {
+    transition: color 0.2s ease;
+    color: #f47b56;
+  }
+
+  .image-wrapper {
+    position: relative;
+    height: 180px;
+    width: 237px;
+    z-index: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 300px;
+    /* max-width: 450px; */
+  }
+
+  .woman-online-mobile {
+    display: none;
+  }
+
+  .pattern-mobile {
+    display: none;
+  }
+
+  .woman-online-desktop {
+    width: 472px;
+    height: 359px;
+    position: relative;
+    display: flex;
+    /* overflow: hidden; */
+    /* bottom: -490px; */
+    top: 156px;
+    right: 270px;
+  }
+
+  .pattern-desktop {
+    top: -128px;
+    display: block;
+    /* height: 823px; */
+    width: 902px;
+    position: absolute;
+    z-index: -1;
+    left: -409px;
+  }
+
+  .box-desktop {
+    display: flex;
+    position: relative;
+    left: -458px;
+    top: -138px;
+    z-index: 2;
+  }
+
+  .box-desktop:hover {
+    transform: scale(1.2);
+    /* transform: translateX(30px); */
+    transition: transform 0.7s ease;
+  }
 }
