@@ -29,7 +29,6 @@ body {
   width: 327px;
   top: 148px;
   position: absolute;
-  max-height: 100%;
 }
 
 .content {
@@ -137,6 +136,8 @@ hr {
 }
 
 .attribution {
+  position: relative;
+  top: 300px;
   font-size: 12px;
   text-align: center;
   /* font-family: ; */
@@ -152,7 +153,7 @@ hr {
   .card {
     width: 920px;
     height: 484px;
-    position: relative;
+    /* position: relative; */
     overflow: hidden;
   }
 
@@ -247,7 +248,7 @@ hr {
     display: flex;
     position: relative;
     left: -458px;
-    top: -138px;
+    top: 165px;
     z-index: 2;
   }
 
