@@ -1,0 +1,267 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap");
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: spartan;
+  font-size: 32px;
+}
+
+body {
+  font-family: spartan;
+  background: var(--bg-theme);
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
+/* theme 1 */
+
+:root {
+  /* top */
+  --button-toggle: #d03f2f;
+
+  /* bg */
+  --bg-theme: #3a4663;
+  --bg-screen-input: #181f33;
+  --bg-touches-themes: #242d44;
+  --bg-touch-numb-operator: #eae3dc;
+  --bg-shadow-touch-numb-operator: inset 0px -4px 0px #b3a497;
+  --bg-touch-reset-del: #647198;
+  --bg-shadow-touch-reset-del: inset 0px -4px 0px #414e73;
+  --bg-touch-equal: #d03f2f;
+  --bg-shadow-touch-equal: inset 0px -4px 0px #93261a;
+  --bg-active-touch: #fffffe;
+  --bg-active-touch-shadow: inset 0px -4px 0px #b3a497;
+  --bg-active-touch-reset-del: #a2b2e1;
+  --bg-active-touch-reset-del-shadow: inset 0px -4px 0px #414e73;
+  --bg-active-touch-equal: #f96b5b;
+  --bg-active-touch-equal-shadow: inset 0px -4px 0px #93261a;
+
+  /* text */
+  --color-screen-numb: #ffffff;
+  --color-numb-operator: #434a59;
+  --color-reset-del: #ffffff;
+  --color-equal: #ffffff;
+}
+
+/* theme 2 */
+
+[data-theme="theme2"] {
+  /* top */
+  --button-toggle: #c85402;
+
+  /* bg */
+  --bg-theme: #e6e6e6;
+  --bg-screen-input: #eeeeee;
+  --bg-touches-themes: #d2cdcd;
+  --bg-touch-numb-operator: #e5e4e1;
+  --bg-shadow-touch-numb-operator: inset 0px -4px 0px #a79e91;
+  --bg-touch-reset-del: #378187;
+  --bg-shadow-touch-reset-del: inset 0px -4px 0px #1b6066;
+  --bg-touch-equal: #c85402;
+  --bg-shadow-touch-equal: inset 0px -4px 0px #873901;
+  --bg-active-touch: #ffffff;
+  --bg-active-touch-shadow: inset 0px -4px 0px #a79e91;
+  --bg-active-touch-reset-del: #62b5bc;
+  --bg-active-touch-reset-del-shadow: inset 0px -4px 0px #1b6066;
+  --bg-active-touch-equal: #ff8a38;
+  --bg-active-touch-equal-shadow: inset 0px -4px 0px #873901;
+
+  /* text */
+  --color-screen-numb: #36362c;
+  --color-numb-operator: #36362c;
+  --color-reset-del: #ffffff;
+  --color-equal: #ffffff;
+}
+
+/* theme 3 */
+
+[data-theme="theme3"] {
+  /* top */
+  --button-toggle: #00ded0;
+
+  /* bg */
+  --bg-theme: #17062a;
+  --bg-screen-input: #1e0936;
+  --bg-touches-themes: #1e0936;
+  --bg-touch-numb-operator: #331c4d;
+  --bg-shadow-touch-numb-operator: inset 0px -4px 0px #881c9e;
+  --bg-touch-reset-del: #56077c;
+  --bg-shadow-touch-reset-del: inset 0px -4px 0px #be15f4;
+  --bg-touch-equal: #00ded0;
+  --bg-shadow-touch-equal: inset 0px -4px 0px #6cf9f1;
+  --bg-active-touch: #6c34ac;
+  --bg-active-touch-shadow: inset 0px -4px 0px #881c9e;
+  --bg-active-touch-reset-del: #8631af;
+  --bg-active-touch-reset-del-shadow: inset 0px -4px 0px #be15f4;
+  --bg-active-touch-equal: #93fff8;
+  --bg-active-touch-equal-shadow: inset 0px -4px 0px #6cf9f1;
+
+  /* text */
+  --color-screen-numb: #ffe53d;
+  --color-numb-operator: #ffe53d;
+  --color-reset-del: #ffffff;
+  --color-equal: #1a2327;
+}
+
+.wrapper {
+  max-width: 327px;
+  margin: auto;
+  display: grid;
+  grid-gap: 24px;
+  place-items: center center;
+}
+
+/* .top {
+  display: grid;
+  grid-template-areas:
+    "calc" "label" "radio"
+    "calc" "theme" "box";
+}
+
+.themechange {
+  grid-area: theme;
+}
+.radio label {
+  display: block;
+}
+
+.label {
+  grid-area: label;
+}
+
+.calc {
+  grid-area: calc;
+}
+
+.radio {
+  grid-area: radio;
+}
+
+.input {
+  border-radius: 10px;
+} */
+
+.screen {
+  /* display: grid;
+  grid-template-columns: 1fr; */
+  width: 100%;
+  height: 88px;
+  border-radius: 10px;
+  background-color: var(--bg-screen-input);
+}
+
+.screen p {
+  color: var(--color-screen-numb);
+  text-align: right;
+  padding: 26px;
+  font-size: 32px;
+}
+
+.grid-container {
+  width: 100%;
+  padding: 24px;
+  border-radius: 5px;
+  background-color: var(--bg-touches-themes);
+  display: grid;
+  grid-gap: 13px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 2rem);
+}
+
+.btn {
+  border-radius: 5px;
+  font-size: 28px;
+  color: var(--color-numb-operator);
+  font-weight: 700;
+  background: var(--bg-touch-numb-operator);
+  box-shadow: var(--bg-shadow-touch-numb-operator);
+}
+
+.btn:hover {
+  cursor: pointer;
+  transform: 2.5ms ease;
+}
+
+.btn:active {
+  background: var(--bg-active-touch);
+  box-shadow: var(--bg-active-touch-shadow);
+}
+
+.btn-delete,
+.btn-reset {
+  text-transform: uppercase;
+  background: var(--bg-touch-reset-del);
+  box-shadow: var(--bg-shadow-touch-reset-del);
+  color: var(--color-reset-del);
+  font-size: 16px !important;
+}
+
+.btn-delete:active,
+.btn-reset:active {
+  background: var(--bg-active-touch-reset-del);
+}
+
+.btn-reset,
+.btn-output {
+  grid-column: span 2;
+}
+
+.btn-output {
+  background: var(--bg-touch-equal);
+  box-shadow: var(--bg-shadow-touch-equal);
+  color: var(--color-equal);
+  font-size: 16px !important;
+}
+
+.btn-output:active {
+  background: var(--bg-active-touch-equal);
+  box-shadow: var(--bg-active-touch-equal-shadow);
+}
+
+/* Desktop  :  */
+
+@media (min-width: 1000px) {
+  .wrapper {
+    max-width: 540px;
+    grid-gap: 20px;
+  }
+
+  .screen {
+    height: 128px;
+  }
+
+  .screen p {
+    padding: 38px;
+    font-size: 48px;
+  }
+
+  .grid-container {
+    padding: 32px;
+    border-radius: 10px;
+    grid-gap: 24px;
+  }
+
+  .btn {
+    border-radius: 10px;
+    font-size: 32px;
+  }
+
+  .btn-delete,
+  .btn-reset {
+    font-size: 20px !important;
+  }
+
+  .btn-output {
+    font-size: 32px !important;
+  }
+}

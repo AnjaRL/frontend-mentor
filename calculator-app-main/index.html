@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Frontend Mentor | Calculator app</title>
+  </head>
+  <body>
+    <main class="wrapper">
+      <!-- <div class="top">
+        <header class="calc"><h1>calc</h1></header>
+        <div class="themechange">
+          <h6>THEME</h6>
+        </div>
+        <div class="radio">
+          <label class="label" for="theme1">1</label>
+          <input
+            class="box"
+            type="radio"
+            id="theme1"
+            name="theme"
+            value="1"
+            checked
+          />
+          <label class="label" for="theme2">2</label>
+          <input class="box" type="radio" id="theme2" name="theme" value="2" />
+          <label class="label" for="theme3">3</label>
+          <input class="box" type="radio" id="theme3" name="theme" value="3" />
+        </div>
+      </div> -->
+      <section class="screen">
+        <div class="current-operand"><p data-current-operand>0</p></div>
+        <!-- <div class="previous-operand"><p data-previous-operand></p></div> -->
+      </section>
+
+      <section class="grid-container" data-calculator>
+        <button class="btn btn-number" data-number>7</button>
+        <button class="btn btn-number" data-number>8</button>
+        <button class="btn btn-number" data-number>9</button>
+        <button class="btn btn-delete" data-delete>DEL</button>
+        <button class="btn btn-number" data-number>4</button>
+        <button class="btn btn-number" data-number>5</button>
+        <button class="btn btn-number" data-number>6</button>
+        <button class="btn btn-operator" data-operator>+</button>
+        <button class="btn btn-number" data-number>1</button>
+        <button class="btn btn-number" data-number>2</button>
+        <button class="btn btn-number" data-number>3</button>
+        <button class="btn btn-operator" data-operator>-</button>
+        <button class="btn btn-point" data-number>.</button>
+        <button class="btn btn-number" data-number>0</button>
+        <button class="btn btn-operator" data-operator>/</button>
+        <button class="btn btn-operator" data-operator>x</button>
+        <button class="btn btn-reset" data-reset>reset</button>
+        <button class="btn btn-output" data-output>=</button>
+      </section>
+    </main>
+
+    <!-- <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by
+      <a href="https://github.com/AnjaRL/frontend-mentor/"> Anja R. </a>.
+    </div> -->
+
+    <script src="script.js"></script>
+  </body>
+</html>
