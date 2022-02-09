@@ -8,6 +8,7 @@ const outputBtn = document.querySelector("[data-output]");
 const input = document.querySelector("[data-current-operand]");
 const buttons = document.querySelectorAll("[data-calculator] .btn");
 const expression = input.textContent;
+let alreadyComputed = false;
 
 //
 
@@ -46,6 +47,10 @@ function displayItem(e) {
     button.hasAttribute("data-operator")
   ) {
     if (button.hasAttribute("data-number")) {
+      if (alreadyComputed && !containsAnOperator) {
+        input.textContent = ''
+        alreadyComputed = false
+      }
       if (currentOperand === "0") {
         // if the displqy contains already 0, then don't do anything
         // else, display 0
@@ -133,6 +138,7 @@ function calculate() {
   } else input.textContent = input.textContent;
 
   input.textContent = result;
+  alreadyComputed = true;
 }
 
 //*once new number number clicked, clear line and make operation
