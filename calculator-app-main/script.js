@@ -6,15 +6,17 @@ const deleteBtn = document.querySelector("[data-delete]");
 const resetBtn = document.querySelector("[data-reset]");
 const outputBtn = document.querySelector("[data-output]");
 const input = document.querySelector("[data-current-operand]");
-// console.log(operand[2].textContent);
-
 const buttons = document.querySelectorAll("[data-calculator] .btn");
-console.log(buttons);
+const expression = input.textContent;
+
 //
 
 //*how to display number on a screen with a click ?
 
 function displayItem(e) {
+  const containsAnOperator = ["+", "-", "x", "÷"].find((operator) => {
+    return input.textContent.includes(operator);
+  });
   const button = e.target;
 
   const firstOperand = input.textContent[0];
@@ -27,9 +29,7 @@ function displayItem(e) {
   const currentOperand = button.textContent;
 
   const containsADot = input.textContent.includes(".");
-  const containsAnOperator = ["+", "-", "x", "÷"].find((operator) => {
-    return input.textContent.includes(operator);
-  });
+
   //1. Know the button type
   //2. Decide whether to display the content : if number and if operator..., show them. Otherwise, act on it
 
@@ -54,7 +54,7 @@ function displayItem(e) {
           input.textContent += 0;
         }
       } else if (currentOperand === ".") {
-        // if the display doesn't contain yet a dot, and it doesnot contain then add it (in this case, there is no operator)
+        // if the display doesn't contain yet a dot, and it does not contain an operator then add it (in this case, there is no operator)
         // if there's already an operator, where is the dot located ? (left or right side of the operator) ?
         const operatorsIndexes = ["+", "-", "x", "÷"].map((operator) => {
           return input.textContent.indexOf(operator);
@@ -91,7 +91,6 @@ function displayItem(e) {
         lastOperand === "x" ||
         lastOperand === "÷"
       ) {
-        console.log(input.textContent[input.textContent.length - 1]);
         input.textContent = input.textContent.slice(0, -1) + currentOperand;
       } else {
         // if lastOperand displayed is not an operator, then add the operator i.e : 2 -> 2 +
@@ -106,31 +105,40 @@ buttons.forEach((oneButton) => {
 });
 
 //*once button-operator clicked then keep previous number
-// function calculate(e) {
-//   let sign = e.target.textContent;
-//   console.log(e.target.textContent);
-//   let previousOperand;
+function calculate() {
+  const signOfOperator = ["+", "-", "x", "÷"].find((operator) => {
+    if (input.textContent.includes(operator)) {
+      return operator;
+    }
+  });
+  let result;
+  if (input.textContent !== "") {
+    // the arithmetic expression is displayed in the screen, with no space between operators and operands.
+    // First, we need to split the expression (which is a string) by operator. Implicitly, we obtain an array of strings
+    // Choose the operation to execute regarding the operator sign
+    //Then we calculate the integers (+parsefloat the string) and return results
+    // display the result
+    const arithmeticExp = input.textContent;
+    let arithmToSplit = arithmeticExp.split(/[-,+,x,÷]/);
+    let i = 0;
+    if (signOfOperator === "+") {
+      result = parseFloat(arithmToSplit[i]) + parseFloat(arithmToSplit[i + 1]);
+    } else if (signOfOperator === "-") {
+      result = parseFloat(arithmToSplit[i]) - parseFloat(arithmToSplit[i + 1]);
+    } else if (signOfOperator === "x") {
+      result = parseFloat(arithmToSplit[i]) * parseFloat(arithmToSplit[i + 1]);
+    } else if (signOfOperator === "÷") {
+      result = parseFloat(arithmToSplit[i]) / parseFloat(arithmToSplit[i + 1]);
+    }
+  } else input.textContent = input.textContent;
 
-//   currentOperand = previousOperand;
-//   console.log(previousOperand);
-
-//   if (sign === "+") {
-//     previousOperand += currentOperand;
-//   } else if (sign === "-") {
-//     previousOperand -= currentOperand;
-//   } else if (sign === "x") {
-//     previousOperand *= currentOperand;
-//   } else {
-//     previousOperand /= currentOperand;
-//   }
-// }
-// for (let j = 0; j < operator.length; j++) {
-//   operator[j].addEventListener("click", calculate);
-// }
+  input.textContent = result;
+}
 
 //*once new number number clicked, clear line and make operation
+
 //*once button-output clicked, give result
-//*
+outputBtn.addEventListener("click", calculate, displayItem);
 
 //* once button reset clicked, then clear operation, screen empty
 function resetInput() {
@@ -139,14 +147,13 @@ function resetInput() {
 
 resetBtn.addEventListener("click", resetInput, displayItem);
 
-//*once button C clicked, the last number is cleared (slice method)
+//*once button C clicked, if the input displayed contains more less than 1 operand, the input is replaced by 0
+// else, the last operand is deleted
 function deleteInput() {
   if (input.textContent.length === 0 || input.textContent.length <= 1) {
     input.textContent = "0";
-    //     console.log(input.textContent);
   } else {
     input.textContent = input.textContent.slice(0, -1);
-    //     console.log(input.textContent);
   }
 }
 deleteBtn.addEventListener("click", deleteInput, displayItem);
