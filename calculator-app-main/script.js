@@ -44,10 +44,6 @@ function displayItem(e) {
     button.hasAttribute("data-number") ||
     button.hasAttribute("data-operator")
   ) {
-    console.log("lastOperand: " + lastOperand);
-    console.log("containsAnOperator: " + containsAnOperator);
-    console.log("currentOperand: " + currentOperand);
-    console.log("input.textContent :" + input.textContent);
     if (button.hasAttribute("data-number")) {
       if (alreadyComputed && !containsAnOperator) {
         input.textContent = "";
@@ -63,7 +59,7 @@ function displayItem(e) {
       } else if (currentOperand === ".") {
         // if the display doesn't contain yet a dot, and it does not contain an operator then add it (in this case, there is no operator)
         // if there's already an operator, where is the dot located ? (left or right side of the operator) ?
-        console.log("HERE");
+
         const operatorsIndexes = ["+", "-", "x", "÷"].map((operator) => {
           return input.textContent.indexOf(operator);
         });
@@ -74,7 +70,6 @@ function displayItem(e) {
           (!containsADot && !containsAnOperator) ||
           maxIndexOfAnOperator > lastIndexOfADot
         ) {
-          console.log("HERE2");
           if (["+", "-", "x", "÷"].includes(lastOperand)) {
             input.textContent += "0.";
           } else {
@@ -149,27 +144,26 @@ function calculate() {
   alreadyComputed = true;
 }
 
-//*once new number number clicked, clear line and make operation
-
-//*once button-output clicked, give result
-outputBtn.addEventListener("click", calculate, displayItem);
-
-//* once button reset clicked, then clear operation, screen empty
+// When user clicks on RESET : it deletes everything
 function resetInput() {
   input.textContent = "0";
 }
 
-resetBtn.addEventListener("click", resetInput, displayItem);
-
-//*once button C clicked, if the input displayed contains more less than 1 operand, the input is replaced by 0
-// else, the last operand is deleted
+// When user clicks on DEL :
+// if the input displayed is equal or less than 1 element, OR if it's a result already computed => it deletes everything
+// if the input displayed is more than 1 element => it deletes the last element of the input
 function deleteInput() {
-  if (input.textContent.length === 0 || input.textContent.length <= 1) {
-    input.textContent = "0";
+  if (input.textContent.length <= 1 || alreadyComputed) {
+    resetInput();
   } else {
     input.textContent = input.textContent.slice(0, -1);
   }
 }
+
+outputBtn.addEventListener("click", calculate, displayItem);
+
+resetBtn.addEventListener("click", resetInput, displayItem);
+
 deleteBtn.addEventListener("click", deleteInput, displayItem);
 
 // Theme settings :
