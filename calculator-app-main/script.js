@@ -10,22 +10,20 @@ const buttons = document.querySelectorAll("[data-calculator] .btn");
 const expression = input.textContent;
 let alreadyComputed = false;
 
-//
-
 //*how to display number on a screen with a click ?
 
 function displayItem(e) {
   const containsAnOperator = ["+", "-", "x", "÷"].find((operator) => {
     return input.textContent.includes(operator);
   });
+
   const button = e.target;
 
-  const firstOperand = input.textContent[0];
+  let lastOperand = input.textContent[input.textContent.length - 1];
 
   // create a memory whatever variable I have in this, variable different reference
   // input is a reference directly linked to the output of the browser
   // the reference here is the input
-  let lastOperand = input.textContent[input.textContent.length - 1];
 
   const currentOperand = button.textContent;
 
@@ -46,10 +44,14 @@ function displayItem(e) {
     button.hasAttribute("data-number") ||
     button.hasAttribute("data-operator")
   ) {
+    console.log("lastOperand: " + lastOperand);
+    console.log("containsAnOperator: " + containsAnOperator);
+    console.log("currentOperand: " + currentOperand);
+    console.log("input.textContent :" + input.textContent);
     if (button.hasAttribute("data-number")) {
       if (alreadyComputed && !containsAnOperator) {
-        input.textContent = ''
-        alreadyComputed = false
+        input.textContent = "";
+        alreadyComputed = false;
       }
       if (currentOperand === "0") {
         // if the displqy contains already 0, then don't do anything
@@ -61,6 +63,7 @@ function displayItem(e) {
       } else if (currentOperand === ".") {
         // if the display doesn't contain yet a dot, and it does not contain an operator then add it (in this case, there is no operator)
         // if there's already an operator, where is the dot located ? (left or right side of the operator) ?
+        console.log("HERE");
         const operatorsIndexes = ["+", "-", "x", "÷"].map((operator) => {
           return input.textContent.indexOf(operator);
         });
@@ -71,7 +74,12 @@ function displayItem(e) {
           (!containsADot && !containsAnOperator) ||
           maxIndexOfAnOperator > lastIndexOfADot
         ) {
-          input.textContent += ".";
+          console.log("HERE2");
+          if (["+", "-", "x", "÷"].includes(lastOperand)) {
+            input.textContent += "0.";
+          } else {
+            input.textContent += ".";
+          }
         }
       } else {
         // if the display starts with 0 and contains a dot, add the current operand  i.e : 0. -> 0.2
@@ -87,7 +95,7 @@ function displayItem(e) {
         }
       }
     } else {
-      // if current operand is an operator,
+      // if current operand is an operator
 
       if (
         // if lastOperand displayed is an operator, then replace it by the current Operand i.e : 2+ -> 2-
