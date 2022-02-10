@@ -137,9 +137,10 @@ function calculate() {
       result = parseFloat(arithmToSplit[i]) * parseFloat(arithmToSplit[i + 1]);
     } else if (signOfOperator === "÷") {
       result = parseFloat(arithmToSplit[i]) / parseFloat(arithmToSplit[i + 1]);
+    } else {
+      result = parseFloat(arithmToSplit[i]);
     }
-  } else input.textContent = input.textContent;
-
+  }
   input.textContent = result;
   alreadyComputed = true;
 }
