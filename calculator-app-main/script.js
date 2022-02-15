@@ -108,11 +108,10 @@ function displayItem(e) {
   }
 }
 
-buttons.forEach((oneButton) => {
-  oneButton.addEventListener("click", displayItem);
-});
-
 //*once button-operator clicked then keep previous number
+
+// use filter() instead of find
+//
 function calculate() {
   const signOfOperator = ["+", "-", "x", "÷"].find((operator) => {
     if (input.textContent.includes(operator)) {
@@ -128,6 +127,8 @@ function calculate() {
     // display the result
     const arithmeticExp = input.textContent;
     let arithmToSplit = arithmeticExp.split(/[-,+,x,÷]/);
+
+    //comment i more meaningful
     let i = 0;
     if (signOfOperator === "+") {
       result = parseFloat(arithmToSplit[i]) + parseFloat(arithmToSplit[i + 1]);
@@ -140,6 +141,15 @@ function calculate() {
     } else {
       result = parseFloat(arithmToSplit[i]);
     }
+
+    // Precedence :
+    // chaining multiple operations by respecting the precedence
+
+    // Split the expression into an array
+    // go over each operator : if * or / first, then check operand before and operand after the * or / and do operation
+    // grab result of the previous operation and continue the calculation with other operand left
+
+    // Closures ?
   }
   input.textContent = result;
   alreadyComputed = true;
@@ -151,15 +161,44 @@ function resetInput() {
 }
 
 // When user clicks on DEL :
-// if the input displayed is equal or less than 1 element, OR if it's a result already computed => it deletes everything
-// if the input displayed is more than 1 element => it deletes the last element of the input
+
+// if the input displayed does not contain an operator :
+// => AND if the input length is greater than 1
+// => AND if the input is not already computed,
+// THEN, it deletes the last element of the input
+
+// if the input displayed does not contain an operator :
+// => AND if the input length is greater than 1
+// => AND if the input is already computed,
+// THEN, it deletes everything
+
+// if the input displayed does not contain an operator :
+// => AND if the input length is less than 1
+// THEN, it deletes everything
+
+// if the input displayed contains an operator :
+// THEN, it deletes the last element of the input
+
 function deleteInput() {
-  if (input.textContent.length <= 1 || alreadyComputed) {
-    resetInput();
+  if (input.textContent.search(/[-,+,x,÷]/) == -1) {
+    console.log(input.textContent.search(/[-,+,x,÷]/));
+    if (input.textContent.length > 1) {
+      if (!alreadyComputed) {
+        input.textContent = input.textContent.slice(0, -1);
+      } else {
+        resetInput();
+      }
+    } else {
+      resetInput();
+    }
   } else {
     input.textContent = input.textContent.slice(0, -1);
   }
 }
+
+buttons.forEach((oneButton) => {
+  oneButton.addEventListener("click", displayItem);
+});
 
 outputBtn.addEventListener("click", calculate, displayItem);
 
