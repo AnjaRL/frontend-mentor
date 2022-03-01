@@ -13,7 +13,7 @@ let alreadyComputed = false;
 //*how to display number on a screen with a click ?
 
 function displayItem(e) {
-  const containsAnOperator = ["+", "-", "x", "÷"].find((operator) => {
+  const containsAnOperator = ["+", "-", "*", "÷"].find((operator) => {
     return input.textContent.includes(operator);
   });
 
@@ -60,7 +60,7 @@ function displayItem(e) {
         // if the display doesn't contain yet a dot, and it does not contain an operator then add it (in this case, there is no operator)
         // if there's already an operator, where is the dot located ? (left or right side of the operator) ?
 
-        const operatorsIndexes = ["+", "-", "x", "÷"].map((operator) => {
+        const operatorsIndexes = ["+", "-", "*", "÷"].map((operator) => {
           return input.textContent.indexOf(operator);
         });
         const lastIndexOfADot = input.textContent.lastIndexOf(".");
@@ -70,7 +70,7 @@ function displayItem(e) {
           (!containsADot && !containsAnOperator) ||
           maxIndexOfAnOperator > lastIndexOfADot
         ) {
-          if (["+", "-", "x", "÷"].includes(lastOperand)) {
+          if (["+", "-", "*", "÷"].includes(lastOperand)) {
             input.textContent += "0.";
           } else {
             input.textContent += ".";
@@ -96,7 +96,7 @@ function displayItem(e) {
         // if lastOperand displayed is an operator, then replace it by the current Operand i.e : 2+ -> 2-
         lastOperand === "+" ||
         lastOperand === "-" ||
-        lastOperand === "x" ||
+        lastOperand === "*" ||
         lastOperand === "÷"
       ) {
         input.textContent = input.textContent.slice(0, -1) + currentOperand;
@@ -108,49 +108,84 @@ function displayItem(e) {
   }
 }
 
-//*once button-operator clicked then keep previous number
-
-// use filter() instead of find
-//
 function calculate() {
-  const signOfOperator = ["+", "-", "x", "÷"].find((operator) => {
-    if (input.textContent.includes(operator)) {
-      return operator;
-    }
-  });
-  let result;
-  if (input.textContent !== "") {
-    // the arithmetic expression is displayed in the screen, with no space between operators and operands.
-    // First, we need to split the expression (which is a string) by operator. Implicitly, we obtain an array of strings
-    // Choose the operation to execute regarding the operator sign
-    //Then we calculate the integers (+parsefloat the string) and return results
-    // display the result
-    const arithmeticExp = input.textContent;
-    let arithmToSplit = arithmeticExp.split(/[-,+,x,÷]/);
+  //   const listOfOperators = ["÷", "*", "+", "-"].map((operator) => ({
+  //     operator,
+  //     indexes: input.textContent
+  //       .split(/([-,+,*,÷])/g)
+  //       .map((character, index) => (character === operator ? index : -1))
+  //       .filter((n) => n >= 0),
+  //   }));
 
-    //comment i more meaningful
-    let i = 0;
-    if (signOfOperator === "+") {
-      result = parseFloat(arithmToSplit[i]) + parseFloat(arithmToSplit[i + 1]);
-    } else if (signOfOperator === "-") {
-      result = parseFloat(arithmToSplit[i]) - parseFloat(arithmToSplit[i + 1]);
-    } else if (signOfOperator === "x") {
-      result = parseFloat(arithmToSplit[i]) * parseFloat(arithmToSplit[i + 1]);
-    } else if (signOfOperator === "÷") {
-      result = parseFloat(arithmToSplit[i]) / parseFloat(arithmToSplit[i + 1]);
+  // first, we split the expression (which is a string) with regex by keeping the delimiter, to get an array
+  let arithExpr = input.textContent.split(/([-,+,*,÷])/g);
+
+  // then, we loop through the array as long as the length of the arithmetic expression is greater than 1, in other words, the very last and only element remaining in the array is the result
+  // we check what are the signs included in the arithmetic expression :
+  // if there are a '*' or a '/', then we execute first those operations
+  // otherwise, it will compute the addition and substraction
+
+  // To calculate each operation :
+  // we calculate with the operand before and after the sign
+  // a. since we are in an array, we remove the operand (of the first operation computed) from the right (=> in order to not modify the order of the array) with .splice(i + 1, 1);
+  // b. then we remove the operand of the left
+  // c. finally, we replace the sign (of the current operation) by the result. That will be the operand for the next operation to be executed
+  // after each sub-operation computed, we need to start the index from 0, to say that we need to go back at the start point in the the array, and it is also a way to prevent the inifinity loop
+
+  // the very last element in the array is the result of the whole operation
+
+  let result = 0;
+  let i = 0;
+
+  while (arithExpr.length > 1) {
+    if (arithExpr.includes("*") || arithExpr.includes("÷")) {
+      if (arithExpr[i] === "*") {
+        result = parseFloat(arithExpr[i - 1]) * parseFloat(arithExpr[i + 1]);
+
+        arithExpr.splice(i + 1, 1);
+
+        arithExpr.splice(i - 1, 1);
+
+        arithExpr.splice(i - 1, 1, result);
+
+        i = 0;
+      } else if (arithExpr[i] === "÷") {
+        result = parseFloat(arithExpr[i - 1]) / parseFloat(arithExpr[i + 1]);
+
+        arithExpr.splice(i + 1, 1);
+
+        arithExpr.splice(i - 1, 1);
+
+        arithExpr.splice(i - 1, 1, result);
+
+        i = 0;
+      }
     } else {
-      result = parseFloat(arithmToSplit[i]);
+      if (arithExpr[i] === "+") {
+        result = parseFloat(arithExpr[i - 1]) + parseFloat(arithExpr[i + 1]);
+
+        arithExpr.splice(i + 1, 1);
+
+        arithExpr.splice(i - 1, 1);
+
+        arithExpr.splice(i - 1, 1, result);
+
+        i = 0;
+      } else if (arithExpr[i] === "-") {
+        result = parseFloat(arithExpr[i - 1]) - parseFloat(arithExpr[i + 1]);
+
+        arithExpr.splice(i + 1, 1);
+
+        arithExpr.splice(i - 1, 1);
+
+        arithExpr.splice(i - 1, 1, result);
+
+        i = 0;
+      }
     }
-
-    // Precedence :
-    // chaining multiple operations by respecting the precedence
-
-    // Split the expression into an array
-    // go over each operator : if * or / first, then check operand before and operand after the * or / and do operation
-    // grab result of the previous operation and continue the calculation with other operand left
-
-    // Closures ?
+    i++;
   }
+
   input.textContent = result;
   alreadyComputed = true;
 }
@@ -181,7 +216,6 @@ function resetInput() {
 
 function deleteInput() {
   if (input.textContent.search(/[-,+,x,÷]/) == -1) {
-    console.log(input.textContent.search(/[-,+,x,÷]/));
     if (input.textContent.length > 1) {
       if (!alreadyComputed) {
         input.textContent = input.textContent.slice(0, -1);
