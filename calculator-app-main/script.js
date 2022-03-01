@@ -108,6 +108,10 @@ function displayItem(e) {
   }
 }
 
+// function to splice elements in the array of the arithmetic expression
+
+function spliceInArithExpress() {}
+
 function calculate() {
   //   const listOfOperators = ["÷", "*", "+", "-"].map((operator) => ({
   //     operator,
