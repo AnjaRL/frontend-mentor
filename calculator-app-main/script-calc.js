@@ -7,10 +7,8 @@ const resetBtn = document.querySelector("[data-reset]");
 const outputBtn = document.querySelector("[data-output]");
 const input = document.querySelector("[data-current-operand]");
 const buttons = document.querySelectorAll("[data-calculator] .btn");
-const expression = input.textContent;
-let alreadyComputed = false;
 
-//*how to display number on a screen with a click ?
+let alreadyComputed = false;
 
 function displayItem(e) {
   const containsAnOperator = ["+", "-", "*", "÷"].find((operator) => {
@@ -91,7 +89,6 @@ function displayItem(e) {
       }
     } else {
       // if current operand is an operator
-
       if (
         // if lastOperand displayed is an operator, then replace it by the current Operand i.e : 2+ -> 2-
         lastOperand === "+" ||
@@ -108,19 +105,13 @@ function displayItem(e) {
   }
 }
 
-// function to splice elements in the array of the arithmetic expression
-
-function spliceInArithExpress() {}
+function splitInput(arithExpr, i, result) {
+  arithExpr.splice(i + 1, 1);
+  arithExpr.splice(i - 1, 1);
+  arithExpr.splice(i - 1, 1, result);
+}
 
 function calculate() {
-  //   const listOfOperators = ["÷", "*", "+", "-"].map((operator) => ({
-  //     operator,
-  //     indexes: input.textContent
-  //       .split(/([-,+,*,÷])/g)
-  //       .map((character, index) => (character === operator ? index : -1))
-  //       .filter((n) => n >= 0),
-  //   }));
-
   // first, we split the expression (which is a string) with regex by keeping the delimiter, to get an array
   let arithExpr = input.textContent.split(/([-,+,*,÷])/g);
 
@@ -130,11 +121,12 @@ function calculate() {
   // otherwise, it will compute the addition and substraction
 
   // To calculate each operation :
-  // we calculate with the operand before and after the sign
+  // we calculate with the operands before and after the sign
+  // function splitInput() is called :
   // a. since we are in an array, we remove the operand (of the first operation computed) from the right (=> in order to not modify the order of the array) with .splice(i + 1, 1);
   // b. then we remove the operand of the left
   // c. finally, we replace the sign (of the current operation) by the result. That will be the operand for the next operation to be executed
-  // after each sub-operation computed, we need to start the index from 0, to say that we need to go back at the start point in the the array, and it is also a way to prevent the inifinity loop
+  // after each sub-operation computed, we need to start the index from 0, to say that we need to go back at the start point in the array, and it is also a way to prevent the inifinity loop
 
   // the very last element in the array is the result of the whole operation
 
@@ -145,47 +137,21 @@ function calculate() {
     if (arithExpr.includes("*") || arithExpr.includes("÷")) {
       if (arithExpr[i] === "*") {
         result = parseFloat(arithExpr[i - 1]) * parseFloat(arithExpr[i + 1]);
-
-        arithExpr.splice(i + 1, 1);
-
-        arithExpr.splice(i - 1, 1);
-
-        arithExpr.splice(i - 1, 1, result);
-
+        splitInput(arithExpr, i, result);
         i = 0;
       } else if (arithExpr[i] === "÷") {
         result = parseFloat(arithExpr[i - 1]) / parseFloat(arithExpr[i + 1]);
-
-        arithExpr.splice(i + 1, 1);
-
-        arithExpr.splice(i - 1, 1);
-
-        arithExpr.splice(i - 1, 1, result);
-
+        splitInput(arithExpr, i, result);
         i = 0;
       }
-    } else {
-      if (arithExpr[i] === "+") {
-        result = parseFloat(arithExpr[i - 1]) + parseFloat(arithExpr[i + 1]);
-
-        arithExpr.splice(i + 1, 1);
-
-        arithExpr.splice(i - 1, 1);
-
-        arithExpr.splice(i - 1, 1, result);
-
-        i = 0;
-      } else if (arithExpr[i] === "-") {
-        result = parseFloat(arithExpr[i - 1]) - parseFloat(arithExpr[i + 1]);
-
-        arithExpr.splice(i + 1, 1);
-
-        arithExpr.splice(i - 1, 1);
-
-        arithExpr.splice(i - 1, 1, result);
-
-        i = 0;
-      }
+    } else if (arithExpr[i] === "+") {
+      result = parseFloat(arithExpr[i - 1]) + parseFloat(arithExpr[i + 1]);
+      splitInput(arithExpr, i, result);
+      i = 0;
+    } else if (arithExpr[i] === "-") {
+      result = parseFloat(arithExpr[i - 1]) - parseFloat(arithExpr[i + 1]);
+      splitInput(arithExpr, i, result);
+      i = 0;
     }
     i++;
   }
@@ -234,6 +200,7 @@ function deleteInput() {
   }
 }
 
+// Event listeners handled :
 buttons.forEach((oneButton) => {
   oneButton.addEventListener("click", displayItem);
 });
@@ -244,9 +211,4 @@ resetBtn.addEventListener("click", resetInput, displayItem);
 
 deleteBtn.addEventListener("click", deleteInput, displayItem);
 
-// Theme settings :
-// theme 1 by default
-// local storage : when the user comes back into the calculator, display his last theme
-// if user toggle to theme 2 then display theme 2
-// if user toggle to theme 3 then display theme 3
-// if user toggle to theme 1 then display theme 1
+

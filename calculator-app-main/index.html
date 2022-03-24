@@ -17,27 +17,40 @@
   </head>
   <body>
     <main class="wrapper">
-      <!-- <div class="top">
-        <header class="calc"><h1>calc</h1></header>
-        <div class="themechange">
-          <h6>THEME</h6>
+      <header>
+        <div class="calc">
+          <h1 class="title-calc">calc</h1>
         </div>
-        <div class="radio">
-          <label class="label" for="theme1">1</label>
-          <input
-            class="box"
-            type="radio"
-            id="theme1"
-            name="theme"
-            value="1"
-            checked
-          />
-          <label class="label" for="theme2">2</label>
-          <input class="box" type="radio" id="theme2" name="theme" value="2" />
-          <label class="label" for="theme3">3</label>
-          <input class="box" type="radio" id="theme3" name="theme" value="3" />
+        <div class="theme-container">
+          <h6 class="theme-title">THEME</h6>
+
+          <div class="theme-selector">
+            <input
+              type="radio"
+              id="theme1"
+              name="radio-theme"
+              value="theme-first"
+              checked
+            />
+            <label for="theme1" data-text="1"></label>
+            <input
+              type="radio"
+              id="theme2"
+              name="radio-theme"
+              value="theme-second"
+            />
+            <label for="theme2" data-text="2"></label>
+            <input
+              type="radio"
+              id="theme3"
+              name="radio-theme"
+              value="theme-third"
+            />
+            <label for="theme3" data-text="3"></label>
+            <div class="theme-dot"></div>
+          </div>
         </div>
-      </div> -->
+      </header>
       <section class="screen">
         <div class="current-operand"><p data-current-operand>0</p></div>
         <!-- <div class="previous-operand"><p data-previous-operand></p></div> -->
@@ -65,14 +78,16 @@
       </section>
     </main>
 
-    <!-- <div class="attribution">
+    <div class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
         >Frontend Mentor</a
-      >. Coded by
-      <a href="https://github.com/AnjaRL/frontend-mentor/"> Anja R. </a>.
-    </div> -->
+      >
+      . Coded by
+      <a href="https://github.com/AnjaRL/frontend-mentor/"> Anja R. </a>
+    </div>
 
-    <script src="script.js"></script>
+    <script src="script-calc.js"></script>
+    <script src="script-theme.js"></script>
   </body>
 </html>

@@ -11,16 +11,21 @@
 }
 
 body {
-  font-family: spartan;
+  /* font-family: spartan; */
   background: var(--bg-theme);
 }
 
 .attribution {
-  font-size: 11px;
+  color: var(--bg-touch-reset-del);
+  margin-top: 15px;
+  font-size: 12px;
   text-align: center;
 }
+
 .attribution a {
-  color: hsl(228, 45%, 44%);
+  color: var(--bg-active-touch-equal);
+  font-size: 12px;
+  text-decoration: none;
 }
 
 /* theme 1 */
@@ -116,40 +121,97 @@ body {
 .wrapper {
   max-width: 327px;
   margin: auto;
+  padding: 30px 25px;
   display: grid;
   grid-gap: 24px;
-  place-items: center center;
+  /* place-items: center center; */
 }
 
-/* .top {
-  display: grid;
-  grid-template-areas:
-    "calc" "label" "radio"
-    "calc" "theme" "box";
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: var(--color-screen-numb);
 }
 
-.themechange {
-  grid-area: theme;
+.title-calc {
+  padding: 0;
 }
-.radio label {
+.theme-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.theme-title {
+  margin-right: 20px;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+.theme-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  width: 75px;
+  height: 25px;
+  border-radius: 13px;
+  background-color: var(--bg-touches-themes);
+}
+
+.theme-selector input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.theme-selector label {
   display: block;
+  width: 25px;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
 }
 
-.label {
-  grid-area: label;
+.theme-selector label:hover {
+  color: var(--bg-touch-reset-del);
+  transition: color 500ms ease-out;
 }
 
-.calc {
-  grid-area: calc;
+.theme-selector input + label::before {
+  position: relative;
+  display: block;
+  text-align: center;
+  top: -20px;
+  content: attr(data-text);
+  left: 0;
+  font-size: 12px;
 }
 
-.radio {
-  grid-area: radio;
+.theme-dot {
+  background: var(--button-toggle);
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 5px;
+  left: 4px;
+  border-radius: 50%;
+  transition: transform 600ms cubic-bezier(0.02, 0.94, 0.09, 0.97);
+  transform: translate3d(0, 0, 0);
 }
 
-.input {
-  border-radius: 10px;
-} */
+.theme-selector input#theme1:checked ~ .theme-dot {
+  transform: translate3d(0, 0, 0);
+}
+
+.theme-selector input#theme2:checked ~ .theme-dot {
+  transform: translate3d(0.8rem, 0, 0);
+}
+
+.theme-selector input#theme3:checked ~ .theme-dot {
+  transform: translate3d(1.6rem, 0, 0);
+}
 
 .screen {
   /* display: grid;
@@ -185,6 +247,7 @@ body {
   font-weight: 700;
   background: var(--bg-touch-numb-operator);
   box-shadow: var(--bg-shadow-touch-numb-operator);
+  border: none;
 }
 
 .btn:hover {
